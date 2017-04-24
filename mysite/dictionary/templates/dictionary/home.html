@@ -7,16 +7,17 @@
 <body>
 <h2>Welcome to the dictionary!</h2>
 
+<p><a href = "{% url 'index' %}">Back to Home Page</a></p>
+
 <p>Features to be added in:</p>
 
 <ul>
 	<li>Way to add entries (new terms)</li>
 </ul>
 
-<form>
-	{% csrf_token %}
-	<input type="text" class="123" placeholder="Type your term here" required>
-	<input type="button" value="Search">
+<form method='GET' action=''>
+	<input type='text' name='q' placeholder='Type an acronym or word here' value='{{ request.GET.q }}'/>
+	<input type='submit' value='Search' />
 </form>
 
 <h3>Here are the current fields</h3>

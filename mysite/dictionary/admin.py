@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import words_NASA
 
-# Register your models here.
+admin.site.register(words_NASA)

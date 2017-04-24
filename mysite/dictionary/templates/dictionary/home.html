@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dictionary</title>
+</head>
+
+<body>
+<h2>Welcome to the dictionary!</h2>
+
+<p>Features to be added in:</p>
+
+<ul>
+	<li>Way to add entries (new terms)</li>
+</ul>
+
+<form>
+	{% csrf_token %}
+	<input type="text" class="123" placeholder="Type your term here" required>
+	<input type="button" value="Search">
+</form>
+
+<h3>Here are the current fields</h3>
+
+<table>
+	<tr>
+		<th>Acronym</th>
+		<th>Meaning</th>
+	</tr>
+
+{% for word in word_list %}
+  <tr>
+  	<td>{{word.acronym}}</td>
+  	<td>{{word.meaning}}</td>
+  </tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

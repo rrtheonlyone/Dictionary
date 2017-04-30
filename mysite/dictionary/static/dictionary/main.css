@@ -1,0 +1,110 @@
+body {
+    background: white url("images/background.png");
+		letter-spacing: .25px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url("images/background4.jpg");
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    min-height: 600px; 
+}
+
+.panel-transparent {
+     background: none;
+  }
+
+h1{
+	padding: 50px 0px 20px 0px;
+	text-align: center;
+}
+
+h2{
+	padding: 2px 0px 5px 0px;
+	text-align: center;
+}
+
+h3{
+	padding: 10px 0px 40px 0px;
+	text-align: center;
+}
+
+#Search{
+	padding: 10px 0px 40px 0px;
+}
+
+#search_bar{
+	height: 60px;
+	background-color: rgba(245, 245, 245, 0.4);
+
+	font-size: 25px;
+	color: yellow;
+}
+
+::-webkit-input-placeholder{
+ font-size: 25px;
+}
+
+#search_button{
+	height: 60px;
+	width: 120px;
+
+	padding: 10px 0px 20px 0px;
+
+	
+	font-size: 2em;
+}
+
+#collaborate_button{
+	height: 80px;
+	width: 200px;
+
+	font-size: 1.5em;
+}
+
+#middle_panel_top{
+	color: white;
+	font-size: 1.5em;
+
+}
+
+#last_panel_top{
+	color: black;
+	text-align: center;
+}
+
+#bottom_page{
+	color:white;
+	text-align: center;
+}
+
+#start, #guess, #reset, #back{
+	color: #fff;
+  background-color: #6496c8;
+  text-shadow: -1px 1px #417cb8;
+  border: none;
+
+  height: 40px;
+  width: 100px;
+}
+
+.text-small{
+	font-size: 1.2em;
+}
+
+ul{
+	list-style-type: none;
+}
+
+#bottom_page{
+	height: 200px;
+}
+
+#hangman_button{
+	height: 80px;
+	font-size: 20px;
+}

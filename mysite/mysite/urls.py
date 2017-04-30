@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^', include('dictionary.urls')),
+    url(r'^dictionary/', include('dictionary.urls',  namespace='dictionary')),
+
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 ]

@@ -1,41 +1,322 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dictionary</title>
+
+    <title>{% block title %}NASAPedia{% endblock title %}</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+		{% load static %}
+
+    <!-- Custom StyleShet -->
+    <link rel="stylesheet" type="text/css" href="{%  static 'dictionary/main.css' %}">
+    
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/abe1dccb90.js"></script>
+
+    <!--JQUERY -->
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    
 </head>
 
 <body>
-<h2>Welcome to the dictionary!</h2>
+    <div class="jumbotron Top_Part">
+      <div class="container-fluid">
+        <div class="row">
+            <h1> NASApedia </h1>
+            <h3> Crowdsourcing website for NASA, space and science terms. Come join us and contribute to making NASA words easy and simple! </h3>
+        </div>
 
-<p><a href = "{% url 'index' %}">Back to Home Page</a></p>
+        <div class="row Second_Row" id="Search">
+        		<form method = 'GET' action=''>
+	            <div class="col-sm-10">
+	                <div class="input-group">
+	                  <span class="input-group-addon" id="basic-addon1"></span>
+	                  <input type="text" class="form-control" placeholder="Type Keyword Here" aria-describedby="basic-addon1" id="search_bar" name="q">
+	                </div>
+	            </div>  
+	            <div class="col-sm-2">
+	                <div class="btn-group" role="group" aria-label="...">
+	                  <button type="submit" class="btn btn-primary" id="search_button">Search</button>
+	                </div>
+	            </div>
+            </form>            
+        </div>
 
-<p>Features to be added in:</p>
+      </div>
 
-<ul>
-	<li>Way to add entries (new terms)</li>
-</ul>
+        <div class="container-fluid Second_Part">
+            <div class="row Third_Row">
+                <div class="col-sm-4" id="middle_panel_top">
+                    <div class="panel panel-default panel-transparent">
+                        <div class="panel-body">
+                            <h2> Trending Topics: </h2>
+                            <ul>
+                                <li>NASA Space Apps Challenge 2017</li>
+                                <li>NASA’s mission to bring humans to Mars</li>
+                                <li>NASA's Cassini mission reveals Saturn's secrets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
 
-<form method='GET' action=''>
-	<input type='text' name='q' placeholder='Type an acronym or word here' value='{{ request.GET.q }}'/>
-	<input type='submit' value='Search' />
-</form>
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-success" id="collaborate_button" onclick='location.href="{% url 'dictionary:add-term' %}";'>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  
+                        Collaborate now
+                    </button>
+                </div>
 
-<h3>Here are the current fields</h3>
+                <div class="col-sm-4">
+                   <button type="button" class="btn btn-danger" id="hangman_button" onclick='location.href="http://flashbynight.com/tutes/hangmanhtml5/example/";'>
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  
+                        Not sure what to search? Play a game of hangman
+                    </button>        
+                </div> 
+             
+            </div>
+        </div>
+    </div>
 
-<table>
-	<tr>
-		<th>Acronym</th>
-		<th>Meaning</th>
-	</tr>
+     <div class="container-fluid Third_Part" id="bottom_page">
+            <div class="row Fourth_Row">
+                <div class="col-sm-4">
+                  <h2>About NASA</h2>
+                  <p>NASA’s scientific and technological advancements in space exploration have taken mankind farther than we have ever gone before. As a pioneer of human and robotic exploration to Mars and beyond, NASA empowers us humans to reach for new heights and learn more about our vast universe everyday.
+                  </p>
+                </div>  
+                <div class="col-sm-4">
+                  <h2>What is NASApedia?</h2>
+                  <p>NASApedia is a crowdsourced collection of scientific definitions. We hope to further NASA’s knowledge-sharing philosophy by making technical terms seamlessly accessible to science enthusiasts of all levels. If you have expertise in any particular field, we gladly welcome your contributions!</p>
+                </div>
+                <div class="col-sm-4">
+                  <h2>Did you know?</h2>
+                  <ul>
+                      <li>“To be officially considered an astronaut by NASA you must travel at least 50 miles above the surface of the Earth!"</li>
 
-{% for word in word_list %}
-  <tr>
-  	<td>{{word.acronym}}</td>
-  	<td>{{word.meaning}}</td>
-  </tr>
-{% endfor %}
+                      <li>“NASA's goal is to have humans up on Mars by some point in the 2030s!”</li>
 
-</table>
+                      <li>“Neutron Stars can spin at a rate of 600 rotations per second!”</li>
+
+                      <li>“All of space is completely silent...”</li>
+                  </ul>
+                </div>              
+            </div>
+        </div>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    
+   
+     <script>
+            // Game constants
+        var GAME_WORDS = [ // List of words available when playing
+                'mars',  
+                'pathfinder',  
+                'planet', 
+            ], 
+            GAME_MASKED_WORD = '', // Stores the masked word to be discovered
+            GAME_SELECTED_WORD = '', // Stores the readable word
+            GAME_PLAYER_ATTEMPTS = 0, // Stores player attempts when failing
+            GAME_RANDOM_NUMBER = 0, // Random number to pick a word
+            GAME_MAX_ATTEMPTS = 7, // Max. player attempts before a game over
+            GAME_UI_COMPONENTS = { // UI components declaration
+                start: $('#start'), 
+                reset: $('#reset'), 
+                back: $('#back'), 
+                guess: $('#guess'), 
+                msg: $('#msg'), 
+                word: $('#word'), 
+                letter: $('#letter')
+            }, 
+            GAME_UI_SECTIONS = { // UI sections declaration
+                menu: $('#menu'), 
+                game: $('#game')
+            };
+
+        $(function() {;
+            var ui = GAME_UI_COMPONENTS;
+            
+            // Initialize game
+            init();
+            
+            // Start button handler
+            ui.start.on('click', function(e) {
+                start();
+            });
+
+            // Guess button handler
+            ui.guess.on('click', function(e) {
+                guess();
+            });
+            
+            // Play Again button handler
+            ui.reset.on('click', function(e) {
+                reset();
+                start();
+            });
+            
+            // Go Back button handler
+            ui.back.on('click', function(e) {
+                init();
+            });
+        });
+
+        /**
+         * Used to initialize the game for first time
+         */
+        function init() {
+            var sections = GAME_UI_SECTIONS;
+            sections.menu.show();
+            sections.game.hide();
+            reset();
+        };
+
+        /**
+         * Used to start the game
+         */
+        function start() {
+            var ui = GAME_UI_COMPONENTS, 
+                sections = GAME_UI_SECTIONS, 
+                words = GAME_WORDS;
+            
+            sections.menu.hide();
+            sections.game.show();
+            
+            GAME_RANDOM_NUMBER = Math.floor(Math.random() * words.length);
+            
+            for (var i = 0; i < words[GAME_RANDOM_NUMBER].length; ++i) {
+                GAME_MASKED_WORD += '*';
+            }
+            
+            GAME_SELECTED_WORD = words[GAME_RANDOM_NUMBER];
+
+            ui.word.html(GAME_MASKED_WORD);
+            ui.letter.focus();
+        };
+
+        /**
+         * Guess button handler
+         */
+        function guess() {
+            var ui = GAME_UI_COMPONENTS, 
+                words = GAME_WORDS, 
+                matches = false, 
+                choice;
+
+            // Clean messages each time player do a guess
+            showMsg('');
+            
+            if (ui.letter && ui.letter.val()) {
+                choice = $.trim(ui.letter.val().toLowerCase());
+            }
+            
+            if (choice) {
+                for (var i = 0; i < GAME_MASKED_WORD.length; ++i) {
+                    if (words[GAME_RANDOM_NUMBER].charAt(i) === choice) {
+                        GAME_MASKED_WORD = GAME_MASKED_WORD.substr(0, i) + choice + 
+                            GAME_MASKED_WORD.substr(i + 1);
+                        matches = true;
+                    }
+                }
+                
+                if (!matches) {
+                    ++GAME_PLAYER_ATTEMPTS;
+                }
+            } else {
+                showMsg('Don\'t forget to type a letter!');
+            }
+            
+            // Show attempts left if more than zero
+            if (GAME_PLAYER_ATTEMPTS > 0) {
+                showMsg('You have ' + 
+                        (GAME_MAX_ATTEMPTS - GAME_PLAYER_ATTEMPTS) + 
+                        ' attempt(s) left!');
+            }
+            
+            // Check game status each time doing a guess
+            if (isGameOver()) {
+                lose();
+            } else if (isGameWin()) {
+                win();
+            } else {
+                ui.word.html(GAME_MASKED_WORD);
+            }
+            
+            ui.letter.focus();
+        };
+
+        /**
+         * Used to set all game variables from the scratch
+         */
+        function reset() {
+            var ui = GAME_UI_COMPONENTS;
+            GAME_MASKED_WORD = '';
+            GAME_PLAYER_ATTEMPTS = 0; 
+            GAME_RANDOM_NUMBER = 0;
+            showMsg('');
+            ui.guess.show();
+            ui.letter.val('');
+            ui.word.html('');
+        };
+
+        /**
+         * Handler when player lose the game
+         */
+        function lose() {
+            var ui = GAME_UI_COMPONENTS;
+            showMsg('You Lose! :(');
+            ui.word.html(GAME_SELECTED_WORD);
+            ui.guess.hide();
+        };
+
+        /**
+         * Handler when player win the game
+         */
+        function win() {
+            var ui = GAME_UI_COMPONENTS;
+            showMsg('You Win! :)');
+            ui.word.html(GAME_SELECTED_WORD);
+            ui.guess.hide();
+        };
+
+        /**
+         * Use to print UI messages for the player
+         */
+        function showMsg(msg) {
+            var ui = GAME_UI_COMPONENTS;
+            ui.msg.html(msg);
+        };
+
+        /**
+         * Check game status, if player is going to lose the game
+         * @returns {Boolean}
+         */
+        function isGameOver() {
+            return (GAME_PLAYER_ATTEMPTS >= GAME_MAX_ATTEMPTS);
+        };
+
+        /**
+         * Check game status, if player is going to win the game
+         * @returns {Boolean}
+         */
+        function isGameWin() {
+            return (GAME_MASKED_WORD === GAME_SELECTED_WORD);
+        };
+    </script>
+
 
 </body>
 </html>
+
+
+
+

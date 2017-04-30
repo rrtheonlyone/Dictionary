@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>NASAPedia</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+		{% load static %}
+
+    <!-- Custom StyleShet -->
+    <link rel="stylesheet" type="text/css" href="{%  static 'dictionary/detail.css' %}">
+    
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/abe1dccb90.js"></script>
+
+    <!-- load D3js -->
+    <script src="//d3plus.org/js/d3.js"></script>
+
+    <!-- load D3plus after D3js -->
+    <script src="//d3plus.org/js/d3plus.js"></script>
+
+</head>
+
+<body>
+    
+    <div class="container">
+    	<div class="row">
+    		<h2>NASApedia: {{query}}</h2>
+
+				<div class="col-sm-12">
+        	<div class="panel panel-success">
+					  <div class="panel-body">
+					    <h3>{{wiki}}</h3>
+					  </div>
+					</div>
+        </div>  
+			</div>
+
+			
+	     <!-- create container element for visualization -->
+			<div id="viz"></div>
+
+			<div class="row">
+
+				<div id="visualisation">
+					<div id="viz"></div>
+				</div>
+
+				<div class="col-sm-12">
+	         <div class="col-sm-12">
+		        <div class="panel panel-success">
+						  <div class="panel-body" id="visual-stuff">
+						    <h3>Want some visual aid? Check these out!</h3>
+						    <ul>
+						    	<li>NASA Image Library: {{images}}</li>
+						    	<li>Youtube: {{video}}</li>
+						    </ul>
+						  </div>
+						</div>
+	         </div>  
+      	</div>
+
+			</div>	
+
+			<div class="row" id="button-row">
+    		<div class="col-sm-8 text-center">
+            <button type="button" class="btn btn-danger btn-lg" id="collaborate_button" onclick='location.href="{% url 'dictionary:add-term' %}";'>
+          		<span class="glyphicon glyphicon-book" aria-hidden="true" ></span>  
+                Have something more to add? Don't keep it to yourself! Click here to submit it
+            </button>
+        </div>
+
+    		<div class="col-sm-4 text-center">
+            <button type="button" class="btn btn-success btn-lg" id="collaborate_button" onclick='location.href="{% url 'dictionary:home' %}";'>
+          		<span class="glyphicon glyphicon-home" aria-hidden="true" ></span>  
+                Main Page
+            </button>
+        </div>        
+			</div>
+    </div>
+
+    <div class="container">
+			<div class="row">
+				<div class="well">
+					<h3>Data submitted by the community:</h3>
+				</div>
+			</div>
+
+			<div class="row">
+
+			{% for word in word_list %}
+	      <div class="col-sm-6">
+	    		<div class="thumbnail">
+						<h4>Star Ratings: 6</h4>
+
+						{% if word.image %}
+            <img src="{{ word.image }}" class="img-responsive">
+						{% endif %}
+
+		        <div class="caption">
+		            <h2>{{word.word}} {% if word.acronym %} - {{word.acronym}} {% endif %}</h2>
+		            <h4>{{word.user}} {% if word.credentials %} - {{word.credentials}} {% endif %} </h4>
+
+		            <p>{{word.definition}}</p>
+
+		            {% if word.links %}
+								<p> Additional Links: {{word.links}} </p>
+								{% endif %}
+
+		            <!-- Favorite Term -->
+		            <a href="#" class="btn btn-default btn-sm btn-favorite" role="button">
+		                <span class="glyphicon glyphicon-star"></span>
+		            </a>
+        		</div>
+    			</div>
+    		</div>
+			
+			{% cycle '' '' '</div><div class="row"' %}
+			{% endfor %}
+			</div>
+		</div>
+
+
+   
+		
+		 <script>
+	    // create sample dataset
+	    var sample_data = [
+	      {"name": "mars", "size": 10},
+	      {"name": "Planet", "size": 8},
+	      {"name": "Solar System", "size": 3},
+	      {"name": "Pathfinder", "size": 4},
+	    ]
+	    // create list of node positions
+	    var positions = [
+	      {"name": "mars", "x": 5, "y": 8},
+	      {"name": "Planet", "x": 2, "y": 9},
+	      {"name": "Solar System", "x": 6, "y": 11},
+	      {"name": "Pathfinder", "x": 2, "y": 5},
+	    ]
+	    // create list of node connections
+	    var connections = [
+	      {"source": "mars", "target": "Planet"},
+	      {"source": "Planet", "target": "mars"},
+	      {"source": "Solar System", "target": "mars"},
+	      {"source": "Pathfinder", "target": "mars"},
+	    ]
+	    // instantiate d3plus
+	    var visualization = d3plus.viz()
+	      .container("#viz")  // container DIV to hold the visualization
+	      .type("network")    // visualization type
+	      .data(sample_data)  // sample dataset to attach to nodes
+	      .nodes(positions)   // x and y position of nodes
+	      .edges(connections) // list of node connections
+	      .size("size")       // key to size the nodes
+	      .id("name")         // key for which our data is unique on
+	      .draw()             // finally, draw the visualization!
+  	</script>
+
+		 <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
+

@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import words_NASA
 
-admin.site.register(words_NASA)
+from .models import Definition
+
+admin.site.register(Definition)
